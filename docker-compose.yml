@@ -1,0 +1,13 @@
+version: '3'
+services:
+  xaravault:
+   image: vault
+   container_name: password-vault
+   ports:
+    - "8201:8200"
+   volumes:
+    - ./data/:/vault/file:rw
+    - ./config/vault.json:/vault/config/vault.json:rw
+   cap_add:
+    - IPC_LOCK
+   entrypoint: vault server -config=/vault/config/vault.json
